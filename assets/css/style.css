@@ -110,21 +110,30 @@ a {
 
 /* モバイルメニューボタン */
 .header__menu-btn {
-    position: absolute;
-    top: 8px;
+    position: fixed;
+    top: 10px;
     right: 15px;
     width: 40px;
     height: 40px;
     background-color: #1D1D1D;
-    border-radius: 0;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7px;
-    z-index: 1001;
+    gap: 5px;
+    z-index: 1002; /* モバイルメニューより上位のz-indexに設定 */
     cursor: pointer;
     border: none;
+    transition: all 0.3s ease;
+}
+
+.header__menu-btn .header__menu-line {
+    width: 20px;
+    height: 2px;
+    background-color: #FFFFFF;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .header__menu-btn.active .header__menu-line:nth-child(1) {
@@ -185,7 +194,6 @@ a {
     padding: 15px 0;
     width: 100%;
     color: #575757;
-    border-bottom: 1px solid #F5F5F5;
 }
 
 .mobile-menu__logo {
@@ -266,6 +274,10 @@ a {
     align-items: center;
     justify-content: center;
     z-index: 999;
+}
+
+body.menu-open .bottom-cta {
+    display: none;
 }
 
 .bottom-cta__text {

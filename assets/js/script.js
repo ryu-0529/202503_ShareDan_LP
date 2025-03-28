@@ -104,11 +104,13 @@ document.addEventListener('DOMContentLoaded', function() {
             menuButton.classList.remove('active');
             // メニュークローズ時にスクロールを許可
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         } else {
             mobileMenu.classList.add('active');
             menuButton.classList.add('active');
             // メニュー展開時にスクロールを固定
             document.body.style.overflow = 'hidden';
+            document.body.classList.add('menu-open');
         }
         isMenuOpen = !isMenuOpen;
     }
@@ -121,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isMenuOpen = false;
             // メニュークローズ時にスクロールを許可
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         }
     }
     
