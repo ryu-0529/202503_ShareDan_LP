@@ -1,0 +1,2607 @@
+/* 基本設定とリセット */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #575757;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-width: 320px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* アニメーション用クラス */
+.animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate.delay-1 {
+    transition-delay: 0.2s;
+}
+
+.animate.delay-2 {
+    transition-delay: 0.4s;
+}
+
+.animate.delay-3 {
+    transition-delay: 0.6s;
+}
+
+.animate.delay-4 {
+    transition-delay: 0.8s;
+}
+
+.animate.delay-5 {
+    transition-delay: 1s;
+}
+
+/* ヘッダーとナビゲーション */
+.header {
+    position: fixed;
+    width: 100%;
+    top: -70px;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.header.visible {
+    top: 0;
+}
+
+.header__nav {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.header__nav-item {
+    background: #000000;
+    border-radius: 18px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.header__nav-item:hover {
+    background: #1ED5AF;
+}
+
+/* モバイルメニューボタン */
+.header__menu-btn {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: #1D1D1D;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    z-index: 1001;
+    cursor: pointer;
+    border: none;
+}
+
+.header__menu-btn.active .header__menu-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.header__menu-btn.active .header__menu-line:nth-child(2) {
+    opacity: 0;
+}
+
+.header__menu-btn.active .header__menu-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.header__menu-line {
+    width: 20px;
+    height: 2px;
+    background-color: #FFFFFF;
+    transition: all 0.3s ease;
+}
+
+/* モバイルメニュー */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #FFFFFF;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 70px 20px 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.mobile-menu__nav-item {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    color: #575757;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.mobile-menu__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mobile-menu__logo-image {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 10px;
+}
+
+.mobile-menu__logo-text {
+    font-size: 13px;
+    color: #FFFFFF;
+    margin-top: 5px;
+}
+
+.mobile-menu__cta-button {
+    margin-top: 40px;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 15px 30px;
+    border-radius: 41px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* サイドCTAボタン */
+.side-cta {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: none;
+}
+
+.side-cta__button {
+    width: 55px;
+    height: 200px;
+    background: #1D1D1D;
+    border-radius: 15px 0 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px 0;
+}
+
+.side-cta__text {
+    writing-mode: vertical-rl;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.side-cta__arrow {
+    color: #C9F554;
+    font-size: 17px;
+}
+
+/* モバイル用下部CTA */
+.bottom-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #000000;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.bottom-cta__text {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* ヒーローセクション */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.hero__images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* モバイル用の5段構成 */
+.hero__mobile-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 320px;
+    transform: rotate(-4deg);
+    margin-top: -20px;
+}
+
+/* 第1段: 仲間と一緒に */
+.hero__text-first {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 64px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+/* 第2段: WEB職人 (ハイライト背景付き) */
+.hero__text-highlight-wrapper {
+    background: #FFFFFF;
+    padding: 0 15px;
+    margin: 0 auto 10px;
+    display: inline-block;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero__text-highlight {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 64px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #81B100;
+}
+
+/* 第3段: になろう！ */
+.hero__text-last {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 43px;
+    line-height: 66px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* 第4段: #WEB開発 #WEB制作 */
+.hero__tags-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* 第5段: #WEBマーケティング */
+.hero__tag {
+    background: #81B100;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.hero__slogan {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    transform: rotate(-4deg);
+    margin-top: -2rem;
+}
+
+.hero__slogan-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.hero__slogan-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.hero__slogan-text-box {
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero__slogan-text--highlight {
+    color: #81B100;
+}
+
+.hero__tags {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px auto 0;
+    transform: rotate(-4deg);
+}
+
+.hero__tag {
+    background: #81B100;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero__tag span {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    line-height: 26px;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+}
+
+.hero__slogan,
+.hero__tags {
+    display: none;
+}
+
+/* プラットフォームセクション */
+.platform {
+    position: relative;
+    width: 100%;
+    padding: 0 0 48px;
+    margin-top: -16px;
+    z-index: 2;
+}
+
+.platform__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url('../images/image.png') no-repeat;
+    background-size: cover;
+    background-position: center top;
+    z-index: -1;
+}
+
+.platform__container {
+    width: 100%;
+    padding: 0 20px 32px;
+    position: relative;
+    z-index: 2;
+}
+
+.platform__header {
+    text-align: center;
+    margin-bottom: 32px;
+    color: #FFFFFF;
+    padding-top: 48px;
+}
+
+.platform__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.platform__logo-image {
+    width: 51px;
+    height: 51px;
+    border-radius: 50%;
+    padding: 4px;
+    margin-bottom: 8px;
+}
+
+.platform__title {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+}
+
+.platform__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.platform__button {
+    background: #000000;
+    border-radius: 41px;
+    color: #FFFFFF;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
+}
+
+.platform__button:hover {
+    background: #1ED5AF;
+}
+
+.platform__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platform__illustration {
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.platform__text {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.platform__subtitle {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.platform__description {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+}
+
+/* 悩みセクション */
+.problems {
+    position: relative;
+    padding: 48px 20px 32px;
+    background-color: #F5F5F5;
+}
+
+.problems__title-box {
+    position: relative;
+    background: #575757;
+    width: 100%;
+    max-width: 348px;
+    height: 64px;
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.problems__title-box::before,
+.problems__title-box::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #C9F554;
+    transform: rotate(-45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.problems__title-box::before {
+    left: 15px;
+    top: 12px;
+}
+
+.problems__title-box::after {
+    right: 15px;
+    top: 12px;
+}
+
+.problems__title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.problems__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    margin-top: 32px;
+}
+
+.problems__card {
+    width: 100%;
+    max-width: 280px;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.problems__icon {
+    width: 206px;
+    height: 206px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    margin-bottom: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.problems__text-container {
+    width: 100%;
+    position: relative;
+}
+
+.problems__card-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 27px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.problems__highlight-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.problems__custom-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 13px;
+    background: #D1FF57;
+    mix-blend-mode: multiply;
+    z-index: 1;
+}
+
+.problems__highlight-text {
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+}
+
+.problems__solution-text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 48px;
+    letter-spacing: 0.1em;
+    color: #575757;
+    line-height: 32px;
+}
+
+/* サークルナビゲーション */
+.circle-nav {
+    position: relative;
+    height: 80px;
+    margin-top: 32px;
+}
+
+.circle-nav__circle {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background-color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.circle-nav__icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* ギルドのしくみセクション */
+.guild-system {
+    position: relative;
+    padding: 0 0 64px;
+    background-color: #F5F5F5;
+}
+
+.guild-system__bg {
+    position: absolute;
+    width: 100%;
+    height: 197px;
+    top: 0;
+    left: 0;
+    background: #1ED5AF;
+    z-index: 0;
+}
+
+.guild-system__header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.guild-system__logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.guild-system__logo {
+    width: 71px;
+    height: 71px;
+    margin-bottom: 8px;
+}
+
+.guild-system__logo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #FFFFFF;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.guild-system__heading-text {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 63px;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    display: block;
+}
+
+.guild-system__title {
+    position: relative;
+    background: #1ED5AF;
+    width: 100vw;
+    margin: 0 0 0 -50vw;
+    left: 50%;
+    right: 50%;
+    padding: 48px 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.guild-system__title-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.guild-system__description {
+    margin-top: 48px;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 0 20px;
+}
+
+.guild-system__diagram {
+    text-align: center;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.guild-system__diagram-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* クランセクション */
+.clans {
+    position: relative;
+    padding: 64px 20px 32px;
+    background: #F5F5F5;
+    overflow: hidden;
+}
+
+.clans__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: url('../images/image.png');
+    background-size: cover;
+    z-index: 0;
+}
+
+.clans__color-bg {
+    background: #1ED5AF;
+    height: 197px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.clans__logo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.clans__logo-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.clans__logo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.clans__title {
+    position: relative;
+    z-index: 2;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 800;
+    font-size: 27px;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    padding-top: 16px;
+    margin-bottom: 32px;
+}
+
+.clans__title-emphasis {
+    font-weight: 900;
+    display: inline-block;
+}
+
+.clans__cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 128px;
+    position: relative;
+    z-index: 2;
+}
+
+/* クランカードコンポーネント */
+.clans__card-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin-top: 85px;
+    /* アイコンの半分の高さ分 */
+}
+
+.clan-card {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.clan-card__icon {
+    width: 170px;
+    height: 170px;
+    background: #C9F554;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -110px;
+    /* 半分の高さを上に出す */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.clan-card__title {
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #575757;
+}
+
+.clan-card__subtitle {
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin: 40px 0 16px;
+}
+
+.clan-card__image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.clan-card__description {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    color: #575757;
+    width: 100%;
+    margin: 0 auto;
+    letter-spacing: 0.1em;
+}
+
+/* スキルセクション */
+.skills {
+    position: relative;
+    background: #F5F5F5;
+    padding: 48px 10px 64px;
+    background: repeating-linear-gradient(45deg, #f5f5f5, #f5f5f5 4px, #fff 8px, #fff 4px);
+}
+
+.skills__title {
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+}
+
+.skills__tabs {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 32px;
+    z-index: 10;
+    position: relative;
+    justify-content: center;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.skills__tabs::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Edge */
+}
+
+.skills__tab {
+    border: 3px solid #575757;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin: 0 8px;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    background: #FFFFFF;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.skills__tab--active {
+    background: #C9F554;
+}
+
+.skills__content-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+}
+
+.skills__nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    color: rgba(87, 87, 87, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 24px;
+}
+
+
+.skills__nav-button--next {
+    right: 5px;
+}
+
+.skills__contents-container {
+    position: relative;
+    width: 100%;
+}
+
+.skills__content {
+    background: #FFFFFF;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+    padding: 24px;
+    display: none;
+    width: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.skills__content--active {
+    display: block;
+}
+
+.skills__content-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.skills__content-subtitle {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: #1ED5AF;
+    margin-bottom: 24px;
+}
+
+.skills__content-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.skills__content-image-wrapper {
+    width: 100%;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.skills__content-details {
+    width: 100%;
+}
+
+.skills__content-description {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+}
+
+.skills__content-tech-list {
+    margin-top: 24px;
+}
+
+.skills__tech-item {
+    margin-bottom: 16px;
+}
+
+.skills__tech-name {
+    background: #1ED5AF;
+    border-radius: 7px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.skills__tech-languages {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    line-height: 22px;
+}
+
+.skills__entry-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: #575757;
+    position: relative;
+    z-index: 2;
+    padding-top: 32px;
+    margin-bottom: 16px;
+}
+
+/* 加入の流れセクション */
+.join-process__heading {
+    position: relative;
+    width: 100vw;
+    /* ビューポート幅いっぱいに */
+    margin-left: calc(-50vw + 50%);
+    /* 中央からの調整 */
+    margin-right: calc(-50vw + 50%);
+    left: 0;
+    right: 0;
+    background-color: #1ED5AF;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 1.25rem 0;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.1em;
+    line-height: 2;
+    z-index: 2;
+}
+
+.join-process__heading::after {
+    content: "";
+    position: absolute;
+    bottom: -0.625rem;
+    /* 10px */
+    left: 0;
+    width: 100%;
+    height: 0.625rem;
+    background: linear-gradient(90deg, #1ED5AF, #1ED5AF 0.625rem, transparent 0.625rem, transparent 1.25rem);
+    background-size: 1.25rem 100%;
+}
+
+.join-process {
+    background-color: #F5F5F5;
+    padding: 0 0 3.75rem;
+    position: relative;
+    counter-reset: steps;
+}
+
+.join-process__bg {
+    background: #1ED5AF;
+    height: 6.875rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.join-process__title {
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 48px;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+    line-height: 32px;
+}
+
+.join-process__steps {
+    position: relative;
+    width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 1.25rem 1.25rem 0;
+    list-style: none;
+    z-index: 1;
+}
+
+.join-step {
+    display: flex;
+    align-items: flex-start;
+    /* バッジの高さに合わせて上揃え */
+    margin-bottom: 2.5rem;
+    counter-increment: steps;
+    position: relative;
+}
+
+.join-step:last-child {
+    margin-bottom: 0;
+}
+
+.join-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 4rem;
+    /* バッジの高さ */
+    left: 2rem;
+    /* バッジの中心 */
+    height: calc(100% - 1.5rem + 2.5rem);
+    /* 本体の高さ - 調整 + 次のステップまでのマージン */
+    width: 0;
+    border-left: 2px dashed #A8A8A8;
+    z-index: 1;
+}
+
+.join-step__badge {
+    flex: 0 0 4rem;
+    /* 幅を固定 (4rem = 64px) */
+    width: 4rem;
+    height: 4rem;
+    background: #1ED5AF;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    margin-right: 1rem;
+    /* タイトルとの間隔 */
+    position: relative;
+    /* 絶対配置でなく相対配置に変更 */
+    z-index: 2;
+}
+
+.join-step__badge::before {
+    content: "Step";
+    font-size: 0.6875rem;
+    line-height: 1.36;
+    display: block;
+}
+
+.join-step__badge::after {
+    /* カウンターを2桁0埋めで表示 */
+    content: "0" counter(steps);
+    font-size: 1.625rem;
+    line-height: 1.15;
+}
+
+.join-step__number {
+    width: 63px;
+    height: 63px;
+    background: #1ED5AF;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    position: absolute;
+    left: -70px;
+    top: 0;
+}
+
+.join-step__label {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.join-step__number {
+    font-size: 1.625rem;
+    line-height: 1.2;
+}
+
+.join-step__count {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.join-step__content {
+    flex: 1;
+    padding: 0.3125rem 0;
+    width: calc(100% - 5rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.join-step__title {
+    flex: 1;
+    /* 残りのスペースを埋める */
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0.5rem 0;
+    /* 上下の余白を追加 */
+    color: #575757;
+    word-wrap: break-word;
+    align-self: center;
+    /* バッジの中央に合わせる */
+}
+
+/* ステップ間の接続線 */
+.join-step::after {
+    content: "";
+    position: absolute;
+    width: 3.93px;
+    height: 40px;
+    background: #A8A8A8;
+    left: -40px;
+    top: 63px;
+}
+
+.join-step:last-child::after {
+    display: none;
+}
+
+/* FAQ セクション */
+.faq {
+    position: relative;
+    padding: 64px 20px 48px;
+    background: #F5F5F5;
+}
+
+.faq__title {
+    background-color: #1ED5AF;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #FFFFFF;
+    padding: 20px 0;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+    line-height: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.faq__title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, #1ED5AF, #1ED5AF 10px, transparent 10px, transparent 20px);
+    background-size: 20px 100%;
+}
+
+.faq__items {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ項目コンポーネント */
+.faq-item {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.faq-item__question {
+    background: #FFFFFF;
+    border: 1px solid #575757;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.faq-item__q-marker {
+    width: 60px;
+    height: 60px;
+    background: #575757;
+    color: #1ED5AF;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.faq-item__q-text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    padding-right: 40px;
+}
+
+.faq-item__toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0);
+    width: 19px;
+    height: 12px;
+    background: #575757;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    transition: transform 0.3s ease;
+}
+
+.faq-item__toggle.active {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-item__answer {
+    background: #FFFFFF;
+    border: 1px solid #575757;
+    border-top: none;
+    display: none;
+}
+
+.faq-item__answer.active {
+    display: flex;
+}
+
+.faq-item__a-marker {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: #1ED5AF;
+    padding: 16px;
+    flex-shrink: 0;
+    width: 60px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faq-item__a-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    padding: 24px 16px 24px 0;
+}
+
+.faq-item__answer-content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 60px);
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+/* レベルチャート */
+.level-chart {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+    margin: 24px 24px;
+}
+
+.level-chart__card {
+    background: #FFFFFF;
+    border: 1px solid #575757;
+    position: relative;
+}
+
+.level-chart__header {
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid #575757;
+}
+
+.level-chart__content {
+    padding: 16px;
+}
+
+.level-chart__point {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.level-chart__point::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 12px;
+}
+
+.level-chart__card--apprentice .level-chart__header {
+    background: #C9F554;
+}
+
+.level-chart__card--disciple .level-chart__header {
+    background: #A8D336;
+}
+
+.level-chart__card--craftsman .level-chart__header {
+    background: #76981B;
+    color: #FFFFFF;
+}
+
+.level-chart__card--master .level-chart__header {
+    background: #4E6A01;
+    color: #FFFFFF;
+}
+
+/* お問い合わせセクション */
+.contact {
+    position: relative;
+    padding: 64px 20px 48px;
+    background: #F5F5F5;
+    overflow: hidden;
+}
+
+.contact__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.contact__background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.9;
+}
+
+.contact__wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.contact__header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.contact__logo-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.contact__logo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.contact__title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 27px;
+    line-height: 45px;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.contact__title-emphasis {
+    font-size: 120%;
+    display: inline-block;
+}
+
+.contact__subtitle {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 60px;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    margin-bottom: 32px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* お問い合わせフォーム */
+.contact-form {
+    background: #FFFFFF;
+    border-radius: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form__group {
+    margin-bottom: 32px;
+}
+
+.contact-form__label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #707F89;
+    margin-bottom: 8px;
+}
+
+.contact-form__required {
+    color: #FF0000;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.contact-form__input-container {
+    width: 100%;
+    position: relative;
+}
+
+.contact-form__input,
+.contact-form__textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #98A6B5;
+    border-radius: 0;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+.contact-form__input:focus,
+.contact-form__textarea:focus {
+    border-color: #1ED5AF;
+    outline: none;
+}
+
+.contact-form__textarea {
+    height: 132px;
+    resize: none;
+}
+
+.contact-form__error {
+    font-size: 11px;
+    color: #FF0000;
+    margin-top: 5px;
+    min-height: 15px;
+}
+
+.contact-form__checkbox-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.contact-form__checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contact-form__checkbox {
+    margin-right: 8px;
+}
+
+.contact-form__checkbox-text {
+    font-size: 11px;
+    text-decoration: underline;
+    color: #3B4043;
+}
+
+.contact-form__submit-container {
+    text-align: center;
+}
+
+.contact-form__submit-button {
+    background: #1ED5AF;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    min-width: 256px;
+}
+
+.contact-form__submit-button:hover {
+    background: #18B092;
+}
+
+.contact-form__submit-button:disabled {
+    background: #CCCCCC;
+    cursor: not-allowed;
+}
+
+.contact-form__input.is-invalid,
+.contact-form__textarea.is-invalid {
+    border-color: #FF0000;
+}
+
+.contact-form__input.is-valid,
+.contact-form__textarea.is-valid {
+    border-color: #1ED5AF;
+}
+
+/* フッター */
+.footer {
+    position: relative;
+}
+
+.footer__main {
+    background: #F0F3F5;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.footer__logo {
+    width: 210px;
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer__company {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.footer__company-label {
+    font-size: 11px;
+    line-height: 24px;
+    color: #3B4043;
+}
+
+.footer__company-logo {
+    width: 167px;
+    max-width: 80%;
+    height: auto;
+}
+
+.footer__info {
+    background: #3B4043;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.footer__links {
+    margin-bottom: 8px;
+}
+
+.footer__link {
+    color: #FFFFFF;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.footer__copyright {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+/* トップに戻るボタン */
+.back-to-top {
+    position: fixed;
+    bottom: 80px;
+    /* モバイル用CTAの高さ分調整 */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #575757;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+}
+
+/* SP向け特別調整 */
+@media (max-width: 30em) {
+    .join-step__badge {
+        flex: 0 0 3.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-right: 0.75rem;
+    }
+
+    .join-step__title {
+        font-size: 0.8125rem;
+    }
+
+    .join-step:not(:last-child)::after {
+        top: 3.5rem;
+        left: 1.75rem;
+    }
+}
+
+/* タブレット用メディアクエリ */
+@media (min-width: 576px) {
+    .platform__buttons {
+        flex-direction: row;
+    }
+
+    .hero__slogan {
+        max-width: 440px;
+    }
+
+    .hero__tags {
+        flex-direction: row;
+        max-width: 440px;
+    }
+
+    .problems__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .problems__card {
+        margin: 0 auto;
+    }
+
+    .problems__card:last-child {
+        grid-column: span 2;
+    }
+
+    .footer__info {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+/* PC用メディアクエリ */
+@media (min-width: 768px) {
+    body {
+        overflow-x: auto;
+    }
+
+    /* ヘッダー */
+    .header__nav {
+        display: flex;
+    }
+
+    .header__menu-btn {
+        display: none;
+    }
+
+    /* ヒーローセクション */
+    .hero {
+        height: 700px;
+    }
+
+    .hero__images {
+        display: flex;
+    }
+
+    .hero__image {
+        width: 25%;
+        height: 100%;
+    }
+
+    /* モバイル用を非表示 */
+    .hero__mobile-content {
+        display: none;
+    }
+
+    /* 従来の構造を表示 */
+    .hero__slogan,
+    .hero__tags {
+        display: block;
+    }
+
+    .hero__slogan {
+        position: relative;
+        width: 90%;
+        max-width: 900px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        transform: rotate(-4deg);
+        margin-top: -2rem;
+    }
+
+    .hero__slogan-row {
+        display: flex;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .hero__slogan-text {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-weight: 800;
+        font-size: 56px;
+        line-height: 1.2;
+        text-align: center;
+        letter-spacing: 0.1em;
+        color: #FFFFFF;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero__slogan-text-box {
+        background: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        margin: 0 auto;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero__slogan-text--highlight {
+        color: #81B100;
+    }
+
+    .hero__tags {
+        position: relative;
+        width: 90%;
+        max-width: 600px;
+        z-index: 2;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        margin: 1rem auto 0;
+        transform: rotate(-4deg);
+        justify-content: center;
+    }
+
+    .hero__tag {
+        height: 30px;
+    }
+
+    .hero__tag span {
+        font-size: 14px;
+    }
+
+    /* サイドCTA */
+    .side-cta {
+        display: block;
+    }
+
+    .bottom-cta {
+        display: none;
+    }
+
+    /* プラットフォーム */
+    .platform__title {
+        font-size: 32px;
+    }
+
+    .platform__content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .platform__illustration {
+        width: 45%;
+        padding-right: 48px;
+    }
+
+    .platform__text {
+        width: 55%;
+        text-align: left;
+    }
+
+    /* 悩み */
+    .problems__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .problems__card:last-child {
+        grid-column: auto;
+    }
+
+    .problems__title-box {
+        max-width: 736px;
+        height: 88px;
+    }
+
+    .problems__title {
+        font-size: 32px;
+    }
+
+    /* ギルドのしくみ */
+    .guild-system__description {
+        max-width: 880px;
+        margin: 32px auto;
+        font-size: 18px;
+    }
+
+    .guild-system__title {
+        padding: 60px 0;
+    }
+
+    .guild-system__logo {
+        width: 85px;
+        height: 85px;
+    }
+
+    .guild-system__logo-text {
+        font-size: 32px;
+    }
+
+    .guild-system__heading-text {
+        font-size: 44px;
+    }
+
+    .guild-system__description {
+        max-width: 800px;
+        margin: 48px auto 0;
+        font-size: 16px;
+    }
+
+    /* クラン */
+    .clans__cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .clans__card-container {
+        width: calc(50% - 20px);
+    }
+
+    /* スキル */
+    .skills__content-layout {
+        flex-direction: row;
+    }
+
+    .skills__content-image-wrapper {
+        width: 40%;
+    }
+
+    .skills__content-details {
+        width: 60%;
+        padding-left: 32px;
+    }
+
+    /* 加入の流れ */
+    .join-process {
+        padding: 0 3.125rem 6.25rem;
+        /* 50px 100px → 3.125rem 6.25rem */
+    }
+
+    .join-process__heading {
+        font-size: 1.75rem;
+        padding: 1.5625rem 0;
+    }
+
+    .join-process__heading::after {
+        /* content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(90deg, #1ED5AF, #1ED5AF 10px, transparent 10px, transparent 20px);
+        background-size: 20px 100%; */
+        bottom: -0.75rem;
+        /* 12px */
+        height: 0.75rem;
+    }
+
+    .join-process__title {
+        font-size: 32px;
+    }
+
+    .join-step__title {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .join-process__steps {
+        padding: 1.875rem 1.875rem 0;
+    }
+
+    .join-step__badge {
+        flex: 0 0 4.375rem;
+        width: 4.375rem;
+        height: 4.375rem;
+        margin-right: 1.5rem;
+    }
+
+    .join-step__badge::before {
+        font-size: 0.75rem;
+        /* 12px → 0.75rem */
+    }
+
+    .join-step__badge::after {
+        font-size: 1.875rem;
+        /* 30px → 1.875rem */
+    }
+
+    .join-step {
+        margin-bottom: 3.125rem;
+    }
+
+    .join-step:not(:last-child)::after {
+        top: 4.375rem;
+        /* 70px → 4.375rem */
+        left: 2.1875rem;
+        /* 35px → 2.1875rem */
+        height: calc(100% - 1.875rem);
+        /* -30px → -1.875rem */
+    }
+
+    /* FAQ */
+    .faq__title {
+        font-size: 32px;
+        padding: 30px 0;
+    }
+
+    .faq-item__q-text {
+        font-size: 20px;
+    }
+
+    .faq-item__a-text {
+        font-size: 16px;
+    }
+
+    /* レベルチャート */
+    .level-chart {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* お問い合わせ */
+    .contact__title {
+        font-size: 32px;
+    }
+
+    .contact__subtitle {
+        font-size: 24px;
+    }
+
+    /* フッター */
+    .footer__main {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        padding: 48px 32px;
+    }
+
+    .footer__logo {
+        /* 中央のカラムに配置 */
+        grid-column: 2;
+        margin: 0 auto;
+    }
+
+    .footer__company {
+        grid-column: 3;
+        justify-self: end;
+        align-items: baseline;
+        text-align: right;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+    }
+}
+
+/* 大型PC・デスクトップ用メディアクエリ */
+@media (min-width: 1200px) {
+
+    /* コンテナ */
+    .container {
+        max-width: 1920px;
+    }
+
+    /* ヘッダー */
+    .header__nav {
+        padding: 0 0;
+    }
+
+    .header__nav-item {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 0 10px;
+    }
+
+    /* ヒーロー */
+    .hero {
+        height: 757px;
+        padding: 0;
+    }
+
+    .hero__images {
+        height: 757px;
+    }
+
+    .hero__image {
+        max-width: 480px;
+    }
+
+    .hero__slogan {
+        position: absolute;
+        left: 50%;
+        top: 320px;
+        transform: translateX(-50%) rotate(-4deg);
+        width: 880px;
+        margin-top: 0;
+    }
+
+    .hero__slogan-text {
+        font-size: 75px;
+    }
+
+    .hero__slogan-text-box {
+        width: 400px;
+        height: 102px;
+    }
+
+    .hero__tags {
+        position: absolute;
+        width: 802px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-4deg);
+        top: 520px;
+        gap: 20px;
+    }
+
+    .hero__tag {
+        height: 49px;
+        padding: 0 20px;
+    }
+
+    .hero__tag span {
+        font-size: 16px;
+    }
+
+    /* プラットフォーム */
+    .platform__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding-top: 80px;
+    }
+
+    .platform__buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
+        max-width: 600px;
+        margin: 40px auto 60px;
+    }
+
+    .platform__button {
+        min-width: 220px;
+        padding: 15px 30px;
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    /* プラットフォームコンテンツ領域も中央揃えに */
+    .platform__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 60px 120px;
+    }
+
+    .platform__content {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .platform {
+        margin-top: -100px;
+        padding-bottom: 120px;
+    }
+
+    .platform__container {
+        max-width: 1920px;
+        padding: 0 50px 100px;
+    }
+
+    .platform__logo-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .platform__title {
+        font-size: 36px;
+    }
+
+    .platform__subtitle {
+        font-size: 28px;
+    }
+
+    .platform__description {
+        font-size: 16px;
+    }
+
+    /* 悩み */
+    .problems {
+        padding: 80px 50px 0;
+    }
+
+    .problems__title-box {
+        height: 100px;
+    }
+
+    .problems__title {
+        font-size: 36px;
+    }
+
+    .problems__card-title {
+        font-size: 16px;
+    }
+
+    .problems__highlight-text {
+        font-size: 20px;
+    }
+
+    .problems__solution-text {
+        font-size: 24px;
+    }
+
+    /* ギルド */
+    .guild-system {
+        padding: 80px 50px 100px;
+    }
+
+    .guild-system__bg {
+        height: 250px;
+    }
+
+    .guild-system__title {
+        padding: 70px 0;
+    }
+
+    .guild-system__logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .guild-system__logo-text {
+        font-size: 36px;
+    }
+
+    .guild-system__heading-text {
+        font-size: 48px;
+    }
+
+    .guild-system__description {
+        max-width: 1200px;
+        font-size: 18px;
+    }
+
+    /* クラン */
+    .clans {
+        padding: 80px 50px 100px;
+    }
+
+    .clans__color-bg {
+        height: 250px;
+    }
+
+    .clans__cards {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .clans__card-container {
+        width: calc(33.333% - 40px);
+    }
+
+    .clans__title {
+        font-size: 36px;
+    }
+
+    /* スキル */
+    .skills {
+        padding: 80px 50px 100px;
+    }
+
+    .skills__tabs {
+        justify-content: center;
+    }
+
+    .skills__content {
+        padding: 48px;
+    }
+
+    .skills__content-title {
+        font-size: 48px;
+    }
+
+    .skills__content-subtitle {
+        font-size: 16px;
+    }
+
+    .skills__content-description {
+        font-size: 16px;
+    }
+
+    .skills__tech-name {
+        font-size: 16px;
+    }
+
+    .skills__tech-languages {
+        font-size: 16px;
+    }
+
+    /* 加入の流れ */
+    .join-process {
+        padding: 0 50px 100px;
+    }
+
+    .join-process__heading {
+        font-size: 2rem;
+        padding: 1.875rem 0;
+    }
+
+    .join-process__steps {
+        max-width: 62.5rem;
+        /* 1000px → 62.5rem */
+        padding: 2.5rem 1.25rem 0;
+        /* 40px 20px → 2.5rem 1.25rem */
+    }
+
+    .join-step {
+        position: relative;
+        margin-bottom: 40px;
+        /* 左側にバッジ用のスペース */
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .join-step__title {
+        font-size: 1.125rem;
+        padding: 1rem 0;
+    }
+
+    .join-step:last-child {
+        margin-bottom: 0;
+    }
+
+    .join-step:not(:last-child)::after {
+        top: 4.375rem;
+        left: 2.1875rem;
+        height: calc(100% - 1.5rem + 3.125rem);
+    }
+
+    .join-step__badge {
+        margin-right: 2rem;
+    }
+
+    .join-step__badge::before {
+        content: "Step";
+        font-size: 11px;
+        display: block;
+        line-height: 15px;
+    }
+
+    .join-step__badge::after {
+        content: attr(data-step);
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .join-step__content {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    /* FAQ */
+    .faq {
+        padding: 80px 50px 100px;
+    }
+
+    .faq__bg {
+        height: 200px;
+    }
+
+    .faq__items {
+        max-width: 1100px;
+    }
+
+    /* お問い合わせ */
+    .contact {
+        padding: 80px 50px 100px;
+    }
+
+    .contact__wrapper {
+        max-width: 1200px;
+    }
+
+    .contact-form {
+        max-width: 800px;
+        padding: 48px;
+        border-radius: 10px;
+    }
+
+    .contact-form__group {
+        display: flex;
+    }
+
+    .contact-form__label {
+        width: 30%;
+        padding-top: 14px;
+    }
+
+    .contact-form__input-container {
+        width: 70%;
+    }
+}
