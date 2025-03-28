@@ -66,6 +66,10 @@ a {
     transition-delay: 1s;
 }
 
+.animate.delay-6 {
+    transition-delay: 1.2s;
+}
+
 /* ヘッダーとナビゲーション */
 .header {
     position: fixed;
@@ -1100,7 +1104,7 @@ body.menu-open .bottom-cta {
 }
 
 .skills__content-title {
-    font-size: 36px;
+    font-size: 33px;
     font-weight: 800;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
