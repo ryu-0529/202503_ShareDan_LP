@@ -1,4 +1,3 @@
-/* 基本設定とリセット */
 *,
 *::before,
 *::after {
@@ -926,7 +925,6 @@ a {
     width: 100%;
     max-width: 350px;
     margin-top: 85px;
-    /* アイコンの半分の高さ分 */
 }
 
 .clan-card {
@@ -952,7 +950,6 @@ a {
     justify-content: center;
     position: absolute;
     top: -110px;
-    /* 半分の高さを上に出す */
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -1023,12 +1020,10 @@ a {
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* Firefox */
 }
 
 .skills__tabs::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Edge */
 }
 
 .skills__tab {
@@ -1197,7 +1192,6 @@ a {
     content: "";
     position: absolute;
     bottom: -0.625rem;
-    /* 10px */
     left: 0;
     width: 100%;
     height: 0.625rem;
@@ -1247,7 +1241,6 @@ a {
 .join-step {
     display: flex;
     align-items: flex-start;
-    /* バッジの高さに合わせて上揃え */
     margin-bottom: 2.5rem;
     counter-increment: steps;
     position: relative;
@@ -1261,11 +1254,8 @@ a {
     content: "";
     position: absolute;
     top: 4rem;
-    /* バッジの高さ */
     left: 2rem;
-    /* バッジの中心 */
     height: calc(100% - 1.5rem + 2.5rem);
-    /* 本体の高さ - 調整 + 次のステップまでのマージン */
     width: 0;
     border-left: 2px dashed #A8A8A8;
     z-index: 1;
@@ -1273,7 +1263,6 @@ a {
 
 .join-step__badge {
     flex: 0 0 4rem;
-    /* 幅を固定 (4rem = 64px) */
     width: 4rem;
     height: 4rem;
     background: #1ED5AF;
@@ -1284,9 +1273,7 @@ a {
     justify-content: center;
     color: #FFFFFF;
     margin-right: 1rem;
-    /* タイトルとの間隔 */
     position: relative;
-    /* 絶対配置でなく相対配置に変更 */
     z-index: 2;
 }
 
@@ -1298,7 +1285,6 @@ a {
 }
 
 .join-step__badge::after {
-    /* カウンターを2桁0埋めで表示 */
     content: "0" counter(steps);
     font-size: 1.625rem;
     line-height: 1.15;
@@ -1345,20 +1331,16 @@ a {
 
 .join-step__title {
     flex: 1;
-    /* 残りのスペースを埋める */
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1.6;
     margin: 0;
     padding: 0.5rem 0;
-    /* 上下の余白を追加 */
     color: #575757;
     word-wrap: break-word;
     align-self: center;
-    /* バッジの中央に合わせる */
 }
 
-/* ステップ間の接続線 */
 .join-step::after {
     content: "";
     position: absolute;
@@ -1848,7 +1830,6 @@ a {
 .back-to-top {
     position: fixed;
     bottom: 80px;
-    /* モバイル用CTAの高さ分調整 */
     right: 20px;
     width: 50px;
     height: 50px;
@@ -2132,7 +2113,6 @@ a {
     /* 加入の流れ */
     .join-process {
         padding: 0 3.125rem 6.25rem;
-        /* 50px 100px → 3.125rem 6.25rem */
     }
 
     .join-process__heading {
@@ -2141,16 +2121,7 @@ a {
     }
 
     .join-process__heading::after {
-        /* content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 10px;
-        background: linear-gradient(90deg, #1ED5AF, #1ED5AF 10px, transparent 10px, transparent 20px);
-        background-size: 20px 100%; */
         bottom: -0.75rem;
-        /* 12px */
         height: 0.75rem;
     }
 
@@ -2176,12 +2147,10 @@ a {
 
     .join-step__badge::before {
         font-size: 0.75rem;
-        /* 12px → 0.75rem */
     }
 
     .join-step__badge::after {
         font-size: 1.875rem;
-        /* 30px → 1.875rem */
     }
 
     .join-step {
@@ -2190,11 +2159,8 @@ a {
 
     .join-step:not(:last-child)::after {
         top: 4.375rem;
-        /* 70px → 4.375rem */
         left: 2.1875rem;
-        /* 35px → 2.1875rem */
         height: calc(100% - 1.875rem);
-        /* -30px → -1.875rem */
     }
 
     /* FAQ */
@@ -2233,7 +2199,6 @@ a {
     }
 
     .footer__logo {
-        /* 中央のカラムに配置 */
         grid-column: 2;
         margin: 0 auto;
     }
@@ -2514,15 +2479,12 @@ a {
 
     .join-process__steps {
         max-width: 62.5rem;
-        /* 1000px → 62.5rem */
         padding: 2.5rem 1.25rem 0;
-        /* 40px 20px → 2.5rem 1.25rem */
     }
 
     .join-step {
         position: relative;
         margin-bottom: 40px;
-        /* 左側にバッジ用のスペース */
         display: flex;
         align-items: flex-start;
     }

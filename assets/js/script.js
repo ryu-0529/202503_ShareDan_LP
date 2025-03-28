@@ -97,24 +97,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // モバイルメニューの開閉
+    // モバイルメニューの開閉 - 改良版
     function toggleMobileMenu() {
         if (isMenuOpen) {
             mobileMenu.classList.remove('active');
             menuButton.classList.remove('active');
+            // メニュークローズ時にスクロールを許可
+            document.body.style.overflow = '';
         } else {
             mobileMenu.classList.add('active');
             menuButton.classList.add('active');
+            // メニュー展開時にスクロールを固定
+            document.body.style.overflow = 'hidden';
         }
         isMenuOpen = !isMenuOpen;
     }
     
-    // モバイルメニュー閉じる
+    // モバイルメニュー閉じる - 改良版
     function closeMobileMenu() {
         if (isMenuOpen) {
             mobileMenu.classList.remove('active');
             menuButton.classList.remove('active');
             isMenuOpen = false;
+            // メニュークローズ時にスクロールを許可
+            document.body.style.overflow = '';
         }
     }
     
@@ -278,9 +284,30 @@ document.addEventListener('DOMContentLoaded', function() {
         menuButton.addEventListener('click', toggleMobileMenu);
     }
     
-    // モバイルメニューリンククリックでメニュー自動クローズ
+    // モバイルメニューリンククリックでメニュー自動クローズ - 改良版
     document.querySelectorAll('.mobile-menu__nav-item').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // まずメニューを閉じる
+                closeMobileMenu();
+                
+                // 少し遅延を入れて滑らかなトランジションを実現
+                setTimeout(() => {
+                    // ヘッダー高さを考慮したオフセット
+                    const headerHeight = 60;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            }
+        });
     });
 
     // FAQ切り替えイベント
@@ -353,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // スムーススクロール
+    // スムーススクロール - 改良版
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -415,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // プライバシーポリシーチェック
-            if (!privacyCheckbox.checked) {
+            if (privacyCheckbox && !privacyCheckbox.checked) {
                 alert('プライバシーポリシーに同意してください');
                 isValid = false;
             }
@@ -441,4 +468,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // モバイルメニューが開いていたら閉じる
         closeMobileMenu();
     });
+    
+    // モバイルメニューのスワイプで閉じる機能 - 新規追加
+    if (mobileMenu) {
+        mobileMenu.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        }, false);
+        
+        mobileMenu.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            // 右から左へのスワイプでメニューを閉じる
+            if (swipeDistance < -50) {
+                closeMobileMenu();
+            }
+        }, false);
+    }
 });
