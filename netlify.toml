@@ -1,16 +1,16 @@
 # Basic認証の設定
 [build]
   publish = "."
-  
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["admin"]}
 
-[build.environment]
-  AUTH_REQUIRED = "true"
-
-[[plugins]]
-  package = "netlify-plugin-inline-functions-env"
+# 最もシンプルな方法でBasic認証を設定
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Basic-Auth = "test1:test" # これは機能しませんでした
+    
+    # 代わりに認証ダイアログ表示を強制する設定
+    WWW-Authenticate = "Basic realm=\"Restricted Area\""
+    
+    # X-Frame-Options を追加（セキュリティのため）
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
