@@ -1,4 +1,11 @@
+# htpasswdファイルを使用したBasic認証の設定
+[[plugins]]
+  package = "@netlify/plugin-htaccess"
+
+[build]
+  publish = "/"
+
 [[headers]]
   for = "/*"
   [headers.values]
-    Basic-Auth = "username:password"
+    Basic-Auth = "test:test"
