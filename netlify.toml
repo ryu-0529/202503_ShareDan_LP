@@ -1,5 +1,16 @@
 # Basic認証の設定
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Basic-Auth = "test1:test"
+[build]
+  publish = "."
+  
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Role = ["admin"]}
+
+[build.environment]
+  AUTH_REQUIRED = "true"
+
+[[plugins]]
+  package = "netlify-plugin-inline-functions-env"
