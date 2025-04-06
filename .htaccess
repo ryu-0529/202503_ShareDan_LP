@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Restricted Area"
-AuthUserFile /var/www/html/.htpasswd
+AuthUserFile /home/c3629771/public_html/ryu-carrier.com/ShareDan_LP/.htpasswd
 Require valid-user
